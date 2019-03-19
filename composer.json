@@ -23,7 +23,7 @@
     ],
     "require": {
         "php": "^7.1",
-        "bacon/bacon-qr-code": "2.0.0"
+        "chillerlan/php-qrcode": "3.0.3"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^4.1"
