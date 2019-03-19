@@ -13,6 +13,12 @@ declare(strict_types=1);
 
 namespace Sonata\GoogleAuthenticator;
 
+use BaconQrCode\Encoder\QrCode;
+use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
+
 /**
  * Responsible for QR image url generation.
  *
@@ -81,6 +87,13 @@ final class GoogleQrUrl
         }
 
         $otpauthString = rawurlencode(sprintf($otpauthString, $label, $secret, $issuer));
+
+        $renderer = new ImageRenderer(
+            new RendererStyle($size),
+            new ImagickImageBackEnd()
+        );
+        $writer = new Writer($renderer);
+        return $writer->writeString($otpauthString);
 
         return sprintf(
             'https://chart.googleapis.com/chart?chs=%1$dx%1$d&chld=M|0&cht=qr&chl=%2$s',
