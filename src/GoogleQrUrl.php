@@ -88,8 +88,12 @@ final class GoogleQrUrl
 
         $otpauthString = sprintf($otpauthString, $label, $secret, $issuer);
 
-        $code = new \chillerlan\QRCode\QRCode();
-        return $code->render($otpauthString);
+        $renderer = new ImageRenderer(
+            new RendererStyle($size),
+            new ImagickImageBackEnd()
+        );
+        $writer = new Writer($renderer);
+        return $writer->writeString($otpauthString);
     }
 }
 
