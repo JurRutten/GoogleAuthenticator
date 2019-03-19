@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\GoogleAuthenticator;
 
-use BaconQrCode\Encoder\QrCode;
-use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
+use BaconQrCode\Renderer\Image\SvgImageBackEnd;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer;
@@ -90,7 +89,7 @@ final class GoogleQrUrl
 
         $renderer = new ImageRenderer(
             new RendererStyle($size),
-            new ImagickImageBackEnd()
+            new SvgImageBackEnd()
         );
         $writer = new Writer($renderer);
         return $writer->writeString($otpauthString);
